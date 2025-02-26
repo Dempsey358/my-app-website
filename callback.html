@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>OAuth Callback</title>
+</head>
+<body>
+<h1>OAuth Callback</h1>
+<p>以下はリダイレクト後のクエリパラメータです：</p>
+<div id="params"></div>
+<script>
+// URLのクエリパラメータを解析して表示するスクリプト
+function getQueryParams() {
+const params = {};
+window.location.search.substring(1).split('&').forEach(function(pair) {
+if(pair !== ""){
+const parts = pair.split('=');
+params[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1] || "");
+}
+});
+return params;
+}
+document.addEventListener('DOMContentLoaded', function() {
+const params = getQueryParams();
+document.getElementById('params').innerHTML = '<pre>' + JSON.stringify(params, null, 2) + '</pre>';
+});
+</script>
+</body>
+</html>
